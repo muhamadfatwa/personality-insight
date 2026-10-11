@@ -1,0 +1,120 @@
+<!doctype html><html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Personality Insight — Personality Adventure</title><link rel="stylesheet" href="style.css"></head><body><main class="app">
+<section id="home" class="screen active">
+  <div class="card hero home-hero">
+    <div class="pill">✦ PERSONALITY INSIGHT</div>
+    <h1>Kenali dirimu,<br><span>atau jelajahi ceritamu.</span></h1>
+    <p>Pilih pengalaman yang kamu inginkan. Kenali pola kepribadianmu lewat tes mendalam, atau bersenang-senang lewat cerita interaktif dengan pilihan yang menentukan perjalananmu.</p>
+    <div class="menu-grid">
+      <article class="menu-card">
+        <div class="menu-icon">🧠</div>
+        <div class="pill">TES KEPRIBADIAN</div>
+        <h2>Personality Insight</h2>
+        <p>50 pertanyaan dalam 5 babak dengan pembacaan sementara dan kesimpulan lengkap di akhir.</p>
+        <button class="btn primary" onclick="start()">Mulai tes kepribadian →</button>
+      </article>
+      <article class="menu-card adventure-menu">
+        <div class="menu-icon">🎭</div>
+        <div class="pill">PERSONALITY ADVENTURE</div>
+        <h2>Jelajahi sebuah cerita</h2>
+        <p>Pilih tindakanmu, ikuti perjalanan singkat, lalu lihat kesimpulan yang terbentuk dari seluruh pilihanmu.</p>
+        <button class="btn primary" onclick="openAdventureMenu()">Mulai adventure →</button>
+      </article>
+    </div>
+    <small class="note">Tes kepribadian adalah alat eksplorasi, bukan diagnosis atau tes MBTI resmi. Adventure bersifat hiburan dan refleksi.</small>
+  </div>
+</section>
+
+<section id="adventureMenu" class="screen">
+  <div class="card adventure-shell">
+    <div class="pill">✦ PERSONALITY ADVENTURE</div>
+    <button class="textbtn top-back" onclick="goHome()">← Kembali ke menu</button>
+    <h1>Pilih perjalananmu.</h1>
+    <p class="adventure-lead">Cerita pendek interaktif. Tidak ada jawaban benar atau salah. Pilihanmu hanya menentukan jalan yang kamu tempuh.</p>
+    <div id="storyList" class="story-list"></div>
+  </div>
+</section>
+
+<section id="adventure" class="screen">
+  <div class="card adventure-story">
+    <div class="story-top">
+      <div>
+        <div class="pill" id="adventureStoryTag">✦ PERSONALITY ADVENTURE</div>
+        <h2 id="adventureStoryTitle" class="adventure-story-title"></h2><p id="adventureCounter" class="muted"></p>
+      </div>
+      <button class="textbtn" onclick="goAdventureMenu()">Keluar</button>
+    </div>
+    <div class="adventure-progress"><i id="adventureProgress"></i></div>
+    <div class="scene-visual" id="sceneVisual">
+      <div class="scene-badge" id="sceneBadge">01 / 10</div>
+      <div class="scene-shade" aria-hidden="true"></div>
+      <img id="sceneImage" class="scene-image" src="" alt="Ilustrasi cerita">
+      <div class="scene-emoji" id="sceneEmoji" aria-hidden="true">🌲</div>
+    </div>
+    <div class="scene-copy">
+      <h1 id="sceneTitle"></h1>
+      <p id="sceneText"></p>
+    </div>
+    <div id="adventureOptions" class="options"></div>
+    <section id="choiceInsight" class="choice-insight" hidden aria-live="polite">
+      <div class="choice-insight-kicker">✦ REFLEKSI PILIHANMU</div>
+      <h2 id="choiceInsightTitle"></h2>
+      <p id="choiceInsightText"></p>
+      <p class="choice-insight-note">Ini bukan penilaian mutlak tentang dirimu. Pilihan dalam cerita bisa dipengaruhi konteks, rasa penasaran, atau sekadar pilihan yang terasa paling cocok saat itu.</p>
+      <button id="choiceContinueButton" class="btn primary" onclick="continueAdventure()">Lanjutkan cerita →</button>
+    </section>
+  </div>
+</section>
+
+<section id="adventureResult" class="screen">
+  <div class="card adventure-result">
+    <div class="resultHead">
+      <div class="pill">✦ HASIL PERJALANANMU</div>
+      <div class="adventure-result-icon" id="adventureResultIcon">🌲</div>
+      <h1 id="adventureResultTitle"></h1>
+      <p id="adventureResultSubtitle"></p>
+    </div>
+    <section class="card journey-summary">
+      <div class="pill">✦ KESIMPULAN</div>
+      <h2>Apa yang terlihat dari perjalananmu</h2>
+      <p id="adventureSummary"></p>
+    </section>
+    <section class="card journey-summary">
+      <div class="pill">✦ POLA PILIHAN</div>
+      <h2>Kecenderungan yang paling menonjol</h2>
+      <div id="journeyTraitList" class="trait-chip-list"></div>
+      <p id="journeyPattern"></p>
+    </section>
+    <section class="card journey-summary">
+      <div class="pill">✦ ANALISIS MENDALAM</div>
+      <h2>Kombinasi kecenderunganmu</h2>
+      <p class="muted">Bagian ini mencari dua kecenderungan yang sama-sama terlihat dalam pilihanmu, bukan sekadar menampilkan satu sifat.</p>
+      <div id="journeyCombinations" class="combo-list"></div>
+    </section>
+    <div class="journey-choices">
+      <div class="pill">✦ BUKTI DARI PERJALANAN</div>
+      <p id="journeyChoices"></p>
+      <p id="journeyEvidence" class="journey-evidence"></p>
+    </div>
+    <div class="actions">
+      <button class="btn primary" onclick="startAdventure()">Jelajahi lagi →</button>
+      <button class="btn secondary" onclick="goAdventureMenu()">Pilih cerita lain</button>
+      <button class="textbtn" onclick="goHome()">Kembali ke menu utama</button>
+    </div>
+    <p class="disclaimer">Hasil ini dibuat untuk hiburan dan refleksi berdasarkan pilihanmu dalam cerita. Bukan diagnosis psikologis.</p>
+  </div>
+</section>
+
+<section id="test" class="screen"><header><div><span id="chapter" class="accent"></span> <span id="counter" class="muted"></span><h2 id="question"></h2></div><button class="textbtn" onclick="restart()">Mulai ulang</button></header><div class="progress"><i id="progress"></i></div><div id="options" class="options"></div><div class="nav"><button id="back" class="btn secondary" onclick="back()">← Kembali</button><button id="next" class="btn primary" onclick="next()" disabled>Lanjut →</button></div></section>
+<section id="insight" class="screen"><div class="card insight"><div class="pill">✦ PEMBACAAN SEMENTARA</div><p class="muted" id="insightProgress"></p><div class="mini" id="miniType">—</div><h1 id="insightTitle"></h1><p id="insightText"></p><div id="traits" class="traits"></div><p class="hint">Ini belum hasil akhir. Jawaban berikutnya masih bisa mengubah gambaranmu.</p><button class="btn primary" onclick="continueTest()">Lanjut 10 pertanyaan →</button></div></section>
+<section id="result" class="screen"><div class="resultHead"><div class="pill">✦ HASIL AKHIR</div><div id="finalType" class="finalType"></div><h1 id="finalName"></h1><p id="finalTag"></p></div><div id="dimensions" class="dimensions"></div><div class="actions"><button class="btn primary" onclick="share()">Bagikan WhatsApp</button><button class="btn secondary" onclick="copyResult()">Salin hasil</button><button class="textbtn" onclick="start()">Tes ulang</button></div><section class="card full-summary"><div class="pill">✦ KESIMPULAN LENGKAP</div><h2>Gambaran besar tentang dirimu</h2><p id="summary"></p><div class="summary-columns"><div><h3>💪 Semua kekuatan</h3><p id="strengthSummary"></p></div><div><h3>⚠️ Semua area pengembangan</h3><p id="blindSummary"></p></div></div></section><div class="grid"><article><h3>🧠 Cara berpikir</h3><p id="thinking"></p></article><article><h3>💪 Kekuatan</h3><ul id="strengths"></ul></article><article><h3>⚠️ Blind spot</h3><ul id="blind"></ul></article><article><h3>👥 Sosial</h3><p id="social"></p></article><article><h3>❤️ Hubungan</h3><p id="relationship"></p></article><article><h3>💼 Kerja & karier</h3><p id="work"></p></article><article><h3>👑 Leadership</h3><p id="leadership"></p></article><article><h3>🔥 Saat tertekan</h3><p id="pressure"></p></article><article class="wide"><h3>🦸 Superhero kamu</h3><p id="hero"></p></article></div>
+<section class="card adventure-cta">
+  <div class="adventure-cta-icon">🎭</div>
+  <div>
+    <div class="pill">COBA PENGALAMAN LAIN</div>
+    <h2>Ingin bersenang-senang?</h2>
+    <p>Masuk ke cerita interaktif dan lihat bagaimana pilihan kecilmu membentuk sebuah perjalanan.</p>
+  </div>
+  <button class="btn primary" onclick="openAdventureMenu()">Mulai Personality Adventure →</button>
+</section>
+<p class="disclaimer">Hasil menggambarkan kecenderungan dari jawaban pada tes ini. Kepribadian manusia lebih kompleks daripada satu label.</p></section>
+</main><script src="data.js"></script><script src="app.js"></script></body></html>
